@@ -1,5 +1,5 @@
 import { City } from '../entities/City';
 
-export interface ISuggestionsService {
+export interface ISuggestionService {
   getCitySuggestions(partialName: string): Promise<City[]>;
 }
