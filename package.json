@@ -1,0 +1,22 @@
+{
+  "name": "travel-planner-graphql-api",
+  "version": "1.0.0",
+  "description": "GraphQL API for travel planning applications built with NodeJS.",
+  "license": "MIT",
+  "author": "Emmanuel Nsanga",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "dotenv": "^17.2.0",
+    "express": "^4.21.2",
+    "graphql": "^16.11.0"
+  },
+  "devDependencies": {
+    "jest": "^30.0.4",
+    "supertest": "^7.1.3"
+  }
+}
