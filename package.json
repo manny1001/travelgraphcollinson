@@ -4,7 +4,6 @@
   "description": "GraphQL API for travel planning applications built with NodeJS.",
   "license": "MIT",
   "author": "Emmanuel Nsanga",
-  "type": "module",
   "main": "index.ts",
   "scripts": {
     "test": "jest"
