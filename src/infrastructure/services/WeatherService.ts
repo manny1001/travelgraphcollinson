@@ -1,11 +1,17 @@
 import axios from 'axios';
+import dotenv from 'dotenv';
+dotenv.config();
 import { IWeatherService } from '../../domain/interfaces/IWeatherService';
 import { RawWeatherForecast } from '../../domain/entities/RawWeatherForecast';
 
 export class WeatherService implements IWeatherService {
   async getWeatherForecast(latitude: number, longitude: number): Promise<RawWeatherForecast> {
     try {
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
+      const baseUrl = process.env.WEATHER_API_URL;
+      if (!baseUrl) {
+        throw new Error('WEATHER_API_URL is not defined in environment variables');
+      }
+      const url = `${baseUrl}?latitude=${latitude}&longitude=${longitude}&current_weather=true`;
       const response = await axios.get(url);
       const currentWeather = response.data.current_weather;
       return {
