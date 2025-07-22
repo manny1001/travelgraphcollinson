@@ -98,8 +98,8 @@ flowchart TD
 
 ### GraphQL Query
 ```graphql
-query GetActivityRecommendations($city: String!, $temperature: Float!, $condition: String!) {
-  activityRanking(city: $city, temperature: $temperature, condition: $condition) {
+query ActivityRanking($temperature: Float!, $weatherCode: Int!) {
+  activityRanking(temperature: $temperature, weatherCode: $weatherCode) {
     name
     ranking
   }
@@ -109,23 +109,44 @@ query GetActivityRecommendations($city: String!, $temperature: Float!, $conditio
 ### Variables
 ```json
 {
-  "city": "London",
+  "weatherCode": 0,
   "temperature": 28,
-  "condition": "clear"
 }
 ```
 
 ### Sample Response
 ```json
 {
+  {
   "data": {
     "activityRanking": [
-      { "name": "Surfing", "ranking": 1 },
-      { "name": "Outdoor Sightseeing", "ranking": 2 },
-      { "name": "Indoor Sightseeing", "ranking": 3 },
-      { "name": "Skiing", "ranking": 4 }
+      {
+        "name": "Outdoor Sightseeing",
+        "ranking": 1
+      },
+      {
+        "name": "Hiking",
+        "ranking": 2
+      },
+      {
+        "name": "Surfing",
+        "ranking": 3
+      },
+      {
+        "name": "Skiing",
+        "ranking": 4
+      },
+      {
+        "name": "Indoor Sightseeing",
+        "ranking": 5
+      },
+      {
+        "name": "Museum Visit",
+        "ranking": 6
+      }
     ]
   }
+}
 }
 ```
 
