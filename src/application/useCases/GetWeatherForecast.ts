@@ -7,7 +7,7 @@ export class GetWeatherForecast {
   constructor(private weatherService: IWeatherService) {}
 
   async execute(latitude: number, longitude: number): Promise<WeatherForecast> {
-    const rawForecast : RawWeatherForecast = await this.weatherService.getWeatherForecast(latitude, longitude);
+    const rawForecast  = await this.weatherService.getWeatherForecast(latitude, longitude);
     const condition = getCondition(rawForecast.weatherCode);
     return {
       temperature: rawForecast.temperature,
