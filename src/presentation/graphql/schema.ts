@@ -32,12 +32,13 @@ const typeDefs = gql`
   type WeatherForecast {
     temperature: Float!
     condition: String!
-    rankedActivities: [Activity!]!
+    weatherCode: Int!
   }
 
   type Query {
     citySuggestions(partialName: String!): [City!]!
     weatherForecast(latitude: Float!, longitude: Float!): WeatherForecast
+    activityRanking(temperature: Float!, weatherCode: Int!): [Activity!]!
   }
 `;
 

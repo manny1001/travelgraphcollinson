@@ -9,20 +9,25 @@ import typeDefs from './presentation/graphql/schema';
 import resolvers from './presentation/graphql/resolvers';
 import { SuggestionsService } from './infrastructure/services/SuggestionsService';
 import { WeatherService } from './infrastructure/services/WeatherService';
+import {ActivityRankingService} from './infrastructure/services/ActivityRankingService'
 import { GetCitySuggestions } from './application/useCases/GetCitySuggestions';
 import { GetWeatherForecast } from './application/useCases/GetWeatherForecast';
+import { GetActivityRanking } from './application/useCases/GetActivityRanking';
 
 // Define context interface
 interface MyContext {
   getCitySuggestions: GetCitySuggestions;
   getWeatherForecast: GetWeatherForecast;
+  getActivityRanking: GetActivityRanking;
 }
 
 // Initialize services and use cases
 const suggestionsService = new SuggestionsService();
 const weatherService = new WeatherService();
+const activityRankingService = new ActivityRankingService();
 const getCitySuggestions = new GetCitySuggestions(suggestionsService);
 const getWeatherForecast = new GetWeatherForecast(weatherService);
+const getActivityRanking = new GetActivityRanking(activityRankingService);
 
 // Create Express app and HTTP server
 const app = express();
@@ -62,7 +67,8 @@ async function startServer() {
       context: async () => ({
         getCitySuggestions,
         getWeatherForecast,
-      }),
+        getActivityRanking
+      })
     })
   );
 
