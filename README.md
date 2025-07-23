@@ -63,6 +63,7 @@ flowchart TD
 ```
 
 ### **Architecture Breakdown**
+
 - **Presentation Layer**: Hosts the **TravelGraphCollinson** GraphQL endpoint using Apollo Server, serving as the entry point for client queries. Styled with Collinson's **navy blue** and **teal** for a professional look.[](https://www.apollographql.com/docs/react/data/operation-best-practices)
 - **Application Layer**: Contains use cases for city suggestions, weather forecasts, and activity ranking, orchestrating business logic and external service calls.
 - **Domain Layer**: Defines core entities (`City`, `WeatherForecast`, `Activity`) and business logic (e.g., activity ranking algorithm), ensuring weather-aware recommendations.
@@ -75,6 +76,7 @@ flowchart TD
 1. **City Selection**: Users query the API for city suggestions via the `GetCitySuggestions` use case, powered by OpenMeteo's geocoding API.
 2. **Weather Data Retrieval**: The `GetWeatherForecast` use case fetches real-time weather data (temperature, condition, etc.) for the selected city.
 3. **Activity Ranking**: The `GetActivityRanking` use case applies a weighted scoring system to rank activities (e.g., Skiing, Surfing, Indoor/Outdoor Sightseeing) based on weather factors like temperature and condition. The algorithm is:
+
    - **Rule-Based & Configurable**: Each activity is associated with a set of ranking rules, defined in [`src/utils/activityRules.ts`](src/utils/activityRules.ts). Each rule specifies:
      - `condition`: The weather condition (e.g., 'snow', 'clear', 'rain', etc.)
      - `temperatureRange` (optional): The range of temperatures for which the rule applies
@@ -97,6 +99,7 @@ flowchart TD
 ## 🛠️ **Usage Example**
 
 ### GraphQL Query
+
 ```graphql
 query ActivityRanking($temperature: Float!, $weatherCode: Int!) {
   activityRanking(temperature: $temperature, weatherCode: $weatherCode) {
@@ -107,14 +110,16 @@ query ActivityRanking($temperature: Float!, $weatherCode: Int!) {
 ```
 
 ### Variables
+
 ```json
 {
   "weatherCode": 0,
-  "temperature": 28,
+  "temperature": 28
 }
 ```
 
 ### Sample Response
+
 ```json
 {
   {
@@ -155,6 +160,7 @@ query ActivityRanking($temperature: Float!, $weatherCode: Int!) {
 ## 🎨 **Color Scheme**
 
 The **TravelGraphCollinson** API and its documentation adopt the Collinson Group website's color palette for a cohesive and professional aesthetic:
+
 - **Navy Blue (#003087)**: Primary color for headers, backgrounds, and key UI elements.
 - **Teal (#00A4B4)**: Accent color for buttons, links, and highlights.
 - **White (#FFFFFF)**: Backgrounds and text for clean readability.
@@ -167,27 +173,32 @@ This palette ensures a modern, trustworthy, and visually appealing experience, a
 ## 🔧 **Setup Instructions**
 
 1. **Clone the Repository**:
+
    ```bash
    git clone https://github.com/manny1001/travel-graph-collinson.git
    cd travelgraphcollinson
    ```
 
 2. **Install Dependencies**:
+
    ```bash
    npm install
    ```
 
 3. **Configure Environment**:
    Create a `.env` file with OpenMeteo API endpoints:
+
    ```env
    OPENMETEO_GEOCODING_API=https://api.open-meteo.com/v1/geocoding
    OPENMETEO_WEATHER_API=https://api.open-meteo.com/v1/forecast
    ```
 
 4. **Run the Server**:
+
    ```bash
    npm start
    ```
+
    The GraphQL endpoint will be available at `http://localhost:4000/graphql`.
 
 5. **Explore the API**:
@@ -198,6 +209,7 @@ This palette ensures a modern, trustworthy, and visually appealing experience, a
 ## 🌐 **Extending the System**
 
 The **TravelGraphCollinson** API is designed for extensibility:
+
 - **Add New Activities**: Update the `activityPreferences` configuration in `activityRanker.ts` to include new activities with their ideal conditions.
 - **Incorporate Additional Weather Factors**: Extend the `WeatherFactors` interface to include parameters like wind speed or humidity.
 - **Integrate New Data Sources**: Add services in the Infrastructure Layer to connect to other APIs (e.g., travel itinerary APIs like Alpaca Travel).[](https://github.com/AlpacaTravel/graphql-docs)
@@ -215,9 +227,40 @@ The **TravelGraphCollinson** API is designed for extensibility:
 
 ---
 
+## ⚖️ **Omissions & Trade-offs**
+
+**What was omitted or simplified, and why:**
+
+- **Limited Activity Set:** Only the four specified activities (Skiing, Surfing, Indoor/Outdoor Sightseeing) are supported. This keeps the scope focused and manageable for the test duration.
+- **Simple Rule-Based Ranking:** Activity ranking uses a rule-based system (configurable rules per activity) rather than a machine learning or data-driven approach. This ensures clarity and maintainability within the time constraints.
+- **Basic Error Handling:** Error handling is present but not exhaustive (e.g., fallback to empty arrays, generic error messages). More granular error reporting and logging could be added for production.
+- **No Persistent Storage:** The API is stateless and does not persist user queries, favorites, or history. Adding a database was omitted to focus on core logic and API design.
+- **OpenMeteo API Only:** Only OpenMeteo is used for city and weather data. No fallback or aggregation from other APIs is implemented.
+- **Multi-Day Weather Forecasts:** Focused on current weather data to meet immediate requirements, as multi-day forecasts require additional API calls and schema changes.
+
+---
+
+## 🚀 **Improvements & Extensions (with More Time)**
+
+**How the project could be improved or extended:**
+
+- **Broader Activity Catalog:** Add more activities and allow dynamic configuration or user-submitted activities.
+- **Personalization:** Support user profiles, preferences, and personalized activity recommendations (e.g., based on past choices or interests).
+- **Advanced Ranking:** Use machine learning or data analytics to improve activity ranking based on real user data and feedback.
+- **Persistent Storage:** Integrate a database (e.g., PostgreSQL, MongoDB) for storing user data, activity logs, and usage analytics.
+- **Robust Error Handling:** Implement detailed error responses, logging, and monitoring for production readiness.
+- **API Rate Limiting & Security:** Add authentication (OAuth, JWT) and robust rate limiting to protect API endpoints.
+- **Multiple Data Sources:** Aggregate weather and geolocation data from multiple APIs for redundancy and accuracy.
+- **Localization:** Support multiple languages and regional formats for global users.
+- **Documentation & Developer Experience:** Expand API documentation, add OpenAPI/GraphQL schema docs, and provide more usage examples.
+- **Deployment & CI/CD:** Add Docker support, CI/CD pipelines, and deployment scripts for cloud environments.
+
+---
+
 ## 📝 **Contributing**
 
 We welcome contributions! To contribute:
+
 1. Fork the repository.
 2. Create a feature branch (`git checkout -b feature/new-activity`).
 3. Commit changes (`git commit -m "Add new activity support"`).
@@ -226,6 +269,4 @@ We welcome contributions! To contribute:
 
 Please follow the [Contributing Guidelines](CONTRIBUTING.md) for details.
 
----
 
-##
