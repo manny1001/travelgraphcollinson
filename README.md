@@ -194,6 +194,34 @@ The **TravelGraphCollinson** API is designed for extensibility:
 
 ---
 
+## ⚖️ **Omissions & Trade-offs**
+
+**What was omitted or simplified, and why:**
+
+- **Limited Activity Set:** Only the four specified activities (Skiing, Surfing, Indoor/Outdoor Sightseeing) are supported. This keeps the scope focused and manageable for the test duration.
+- **Simple Rule-Based Ranking:** Activity ranking uses a rule-based system (configurable rules per activity) rather than a machine learning or data-driven approach. This ensures clarity and maintainability within the time constraints.
+- **Basic Error Handling:** Error handling is present but not exhaustive (e.g., fallback to empty arrays, generic error messages). More granular error reporting and logging could be added for production.
+- **No Persistent Storage:** The API is stateless and does not persist user queries, favorites, or history. Adding a database was omitted to focus on core logic and API design.
+- **OpenMeteo API Only:** Only OpenMeteo is used for city and weather data. No fallback or aggregation from other APIs is implemented.
+---
+
+## 🚀 **Improvements & Extensions (with More Time)**
+
+**How the project could be improved or extended:**
+
+- **Broader Activity Catalog:** Add more activities and allow dynamic configuration or user-submitted activities.
+- **Personalization:** Support user profiles, preferences, and personalized activity recommendations (e.g., based on past choices or interests).
+- **Advanced Ranking:** Use machine learning or data analytics to improve activity ranking based on real user data and feedback.
+- **Persistent Storage:** Integrate a database (e.g., PostgreSQL, MongoDB) for storing user data, activity logs, and usage analytics.
+- **Robust Error Handling:** Implement detailed error responses, logging, and monitoring for production readiness.
+- **API Rate Limiting & Security:** Add authentication (OAuth, JWT) and robust rate limiting to protect API endpoints.
+- **Multiple Data Sources:** Aggregate weather and geolocation data from multiple APIs for redundancy and accuracy.
+- **Localization:** Support multiple languages and regional formats for global users.
+- **Documentation & Developer Experience:** Expand API documentation, add OpenAPI/GraphQL schema docs, and provide more usage examples.
+- **Deployment & CI/CD:** Add Docker support, CI/CD pipelines, and deployment scripts for cloud environments.
+
+---
+
 ## 📝 **Contributing**
 
 We welcome contributions! To contribute:
@@ -206,5 +234,3 @@ We welcome contributions! To contribute:
 Please follow the [Contributing Guidelines](CONTRIBUTING.md) for details.
 
 ---
-
-##
