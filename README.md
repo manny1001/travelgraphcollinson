@@ -43,6 +43,7 @@ flowchart TD
     subgraph Infrastructure Layer
         D1[SuggestionsService<br><font color=#003087>OpenMeteo Geocoding API</font>]
         D2[WeatherService<br><font color=#003087>OpenMeteo Weather API</font>]
+        D3[ActivityRankingService<br><font color=#003087>Activity Ranking Logic</font>]
     end
     User((User)):::user
     User-->|GraphQL Query|A
@@ -51,7 +52,8 @@ flowchart TD
     A-->|calls|B3
     B1-->|uses|D1
     B2-->|uses|D2
-    B3-->|uses|C2
+    B3-->|uses|D3
+    D3-->|uses|C2
     B1-->|uses|C1
     B2-->|uses|C1
     B3-->|uses|C1
