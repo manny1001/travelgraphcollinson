@@ -271,10 +271,4 @@ We welcome contributions! To contribute:
 
 Please follow the [Contributing Guidelines](CONTRIBUTING.md) for details.
 
-## <<<<<<< HEAD
 
-## =======
-
-##
-
-> > > > > > > e2643259e424b975afa80cdef06d7a2e7c961715
